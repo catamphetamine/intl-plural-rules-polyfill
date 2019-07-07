@@ -46,7 +46,7 @@ function generate(ordinals) {
 		// For English there're different variations of "en" language
 		// which differ from one another by a simple dot, e.g. "yr." vs "yr".
 
-		const expectedLocale = getPluralRulesLocale(locale, ordinals ? 'ordinal' : 'cardinal')
+		const expectedLocale = getPluralRulesLocale(locale, ordinals)
 		if (locale !== expectedLocale) {
 			throw new Error(`Expected to find pluralization rules for "${expectedLocale}" locale but found them for "${locale}" locale`)
 		}

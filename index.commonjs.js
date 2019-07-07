@@ -1,4 +1,4 @@
 'use strict'
 
-exports = module.exports = require('./commonjs/PluralRulesFull').default
-exports['default'] = require('./commonjs/PluralRulesFull').default
+exports = module.exports = require('./commonjs/PluralRules').default
+exports['default'] = require('./commonjs/PluralRules').default

@@ -1,1 +1,1 @@
-export { default } from './modules/PluralRulesFull'
+export { default } from './modules/PluralRules'

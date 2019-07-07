@@ -1,16 +1,17 @@
 /**
  * Returns a `locale` for which a function exists in `./PluralRuleFunctions.js`.
  * @param  {string} locale
+ * @param  {boolean} ordinal
  * @return {string}
  * @example
- * getPluralRulesLocale("ru-RU-Cyrl", "cardinal") // Returns "ru".
+ * getPluralRulesLocale("ru-RU-Cyrl") // Returns "ru".
  */
-export default function getPluralRulesLocale(locale, type) {
+export default function getPluralRulesLocale(locale, ordinal) {
 	// "pt" language is the only one having different pluralization rules
 	// for the one ("pt") (Portuguese) locale and the other ("pt-PT") (European Portuguese).
 	// http://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html
 	// (see the entries for "pt" and "pt_PT" there)
-	if (type === 'cardinal' && locale === 'pt-PT') {
+	if (!ordinal && locale === 'pt-PT') {
 		return locale
 	}
 	return getLanguageFromLanguageTag(locale)

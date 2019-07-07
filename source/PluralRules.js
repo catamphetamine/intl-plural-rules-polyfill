@@ -1,3 +1,6 @@
+import Cardinals from "./cardinals"
+import Ordinals from "./ordinals"
+
 import getPluralRulesLocale from "./getPluralRulesLocale"
 
 /**
@@ -9,7 +12,7 @@ export default class PluralRules {
 		const { type } = options
 		if (type === undefined || type === "cardinal") {
 			this.type = "cardinal"
-		} else if (type === "ordinal" && PluralRules.Ordinals) {
+		} else if (type === "ordinal") {
 			this.type = "ordinal"
 		} else {
 			throw new RangeError(`Unsupported "type" option: ${type}`)
@@ -17,14 +20,14 @@ export default class PluralRules {
 		if (typeof locale !== 'string') {
 			throw new TypeError('Only string locale is supported')
 		}
-		if (PluralRules.supportedLocalesOf(locale, this.type).length === 0) {
+		if (PluralRules.supportedLocalesOf(locale).length === 0) {
 			throw new RangeError(`Unsupported locale: ${locale}`)
 		}
-		this.locale = getPluralRulesLocale(locale, this.type)
+		this.locale = getPluralRulesLocale(locale, this.type === "ordinal")
 		this.quantify = this.type === "cardinal" ?
-			PluralRules.Cardinals[this.locale] :
+			Cardinals[this.locale] :
 			// Not for every locale are there "ordinal" plural rules in CLDR.
-			(PluralRules.Ordinals[this.locale] || (() => 'other'))
+			(Ordinals[this.locale] || (() => 'other'))
 	}
 	select(number) {
 		return this.quantify(number)
@@ -40,6 +43,6 @@ export default class PluralRules {
 		if (typeof locales === "string") {
 			locales = [locales]
 		}
-		return locales.filter(locale => PluralRules.Cardinals[getPluralRulesLocale(locale)])
+		return locales.filter(locale => Cardinals[getPluralRulesLocale(locale)])
 	}
 }
