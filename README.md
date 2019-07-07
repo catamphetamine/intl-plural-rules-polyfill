@@ -44,7 +44,7 @@ For more info on which is which read the [official Unicode CLDR documentation](h
 If the app only uses `"cardinals"` type and doesn't use `"ordinals"` then the polyfill can be imported as "cardinals"-only.
 
 ```js
-import PluralRules from "intl-plural-rules-polyfill/cardinals"
+import PluralRules from "intl-plural-rules-polyfill/cardinal"
 ```
 
 ## Under the hood
