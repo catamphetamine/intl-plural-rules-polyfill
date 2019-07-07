@@ -1,6 +1,6 @@
 {
   "name": "intl-plural-rules-polyfill",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A simple Intl.PluralRules polyfill",
   "main": "index.commonjs.js",
   "module": "index.js",
