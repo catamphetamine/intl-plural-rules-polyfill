@@ -5,7 +5,7 @@
 [![npm size](https://img.shields.io/bundlephobia/minzip/intl-plural-rules-polyfill.svg?label=size)](https://www.npmjs.com/package/intl-plural-rules-polyfill)
 [![coverage](https://img.shields.io/coveralls/catamphetamine/intl-plural-rules-polyfill/master.svg?style=flat-square)](https://coveralls.io/r/catamphetamine/intl-plural-rules-polyfill?branch=master)
 
-A simple [`Intl.PluralRules`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/PluralRules) polyfill. Can be imported as "cardinals"-only.
+A simple [`Intl.PluralRules`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/PluralRules) polyfill. Can be imported as "cardinals"-only. Created as part of [`relative-time-format`](https://github.com/catamphetamine/relative-time-format).
 
 ## Install
 
@@ -63,7 +63,7 @@ npm run generate
 One can use any npm CDN service, e.g. [unpkg.com](https://unpkg.com) or [jsdelivr.net](https://jsdelivr.net)
 
 ```html
-<script src="https://unpkg.com/intl-plural-rules-polyfill@[version]/bundle/intl-plural-rules-polyfill.js"></script>
+<script src="https://unpkg.com/intl-plural-rules-polyfill@[version]/bundle/polyfill.js"></script>
 
 <script>
   new PluralRules('en').select(0)

@@ -5,8 +5,13 @@ describe('Intl.PluralRules', () => {
 		expect(() => new PluralRules('xx')).to.throw('Unsupported locale')
 	})
 
-	it('should validate "locales" argument', () => {
-		expect(() => new PluralRules(['en'])).to.throw('Only string locale')
+	it('should accept Array "locales" argument', () => {
+		expect(new PluralRules(['en']).select(0)).to.equal('other')
+		expect(new PluralRules(['en']).select(1)).to.equal('one')
+	})
+
+	it('should validate "locale" format', () => {
+		expect(() => new PluralRules('-en')).to.throw('Invalid locale')
 	})
 
 	it('should validate "type" option', () => {

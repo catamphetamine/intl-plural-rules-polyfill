@@ -1,36 +1,38 @@
 import Cardinals from "./cardinals"
-
 import getPluralRulesLocale from "./getPluralRulesLocale"
+
+// Babel adds a bit of its own bloat for `class`es so using a `function` here.
 
 /**
  * `Intl.PluralRules` polyfill.
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/PluralRules
  */
-export default class PluralRules {
-	constructor(locale, options) {
-		if (options && options.type !== "cardinal") {
-			throw new RangeError(`Unsupported "type": ${options.type}`)
-		}
-		if (PluralRules.supportedLocalesOf(locale).length === 0) {
-			throw new RangeError(`Unsupported locale: ${locale}`)
-		}
-		this.locale = getPluralRulesLocale(locale)
-		this.quantify = Cardinals[this.locale]
+export default function PluralRules(locale, options) {
+	if (options && options.type !== "cardinal") {
+		throw new RangeError(`Unsupported "type": ${options.type}`)
 	}
-	select(number) {
-		return this.quantify(number)
+	if (!Cardinals[getPluralRulesLocale(locale)]) {
+		throw new RangeError(`Unsupported locale: ${locale}`)
 	}
-	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/PluralRules/resolvedOptions
-	resolvedOptions() {
-		return {
-			locale: this.locale,
-			type: "cardinal"
-		}
+	this._ = getPluralRulesLocale(locale)
+	this.$ = Cardinals[this._]
+}
+
+PluralRules.prototype.select = function(number) {
+	return this.$(number)
+}
+
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/PluralRules/resolvedOptions
+PluralRules.prototype.resolvedOptions = function() {
+	return {
+		locale: this._,
+		type: "cardinal"
 	}
-	static supportedLocalesOf(locales) {
-		if (typeof locales === "string") {
-			locales = [locales]
-		}
-		return locales.filter(locale => Cardinals[getPluralRulesLocale(locale)])
+}
+
+PluralRules.supportedLocalesOf = function(locales) {
+	if (typeof locales === "string") {
+		locales = [locales]
 	}
+	return locales.filter(locale => Cardinals[getPluralRulesLocale(locale)])
 }
