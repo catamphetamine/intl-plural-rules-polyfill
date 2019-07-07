@@ -1,0 +1,22 @@
+{
+  "require": [
+    "@babel/register"
+  ],
+  "reporter": [
+    "lcov",
+    "text-summary"
+  ],
+  "include": [
+    "source/**/*.js"
+  ],
+  "exclude": [
+    "source/ordinals.js",
+    "source/cardinals.js",
+    "source/PluralRulesCardinals.js",
+    "**/*.test.js"
+  ],
+  "sourceMap": false,
+  "instrument": false,
+  "cache": true,
+  "all": true
+}

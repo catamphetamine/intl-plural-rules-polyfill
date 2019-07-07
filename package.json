@@ -1,0 +1,66 @@
+{
+  "name": "intl-plural-rules-polyfill",
+  "version": "1.0.0",
+  "description": "A simple Intl.PluralRules polyfill",
+  "main": "index.commonjs.js",
+  "module": "index.js",
+  "sideEffects": false,
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.0.0",
+    "@babel/node": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
+    "@babel/plugin-transform-destructuring": "^7.1.2",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "babel-eslint": "^9.0.0",
+    "babel-loader": "^8.0.1",
+    "babel-plugin-istanbul": "^5.1.1",
+    "chai": "^3.5.0",
+    "cldr-data": "^34.0.0",
+    "cldr-dates-full": "^34.0.0",
+    "cross-env": "^5.1.4",
+    "fs-extra": "^5.0.0",
+    "lodash": "^4.17.11",
+    "make-plural": "^4.3.0",
+    "mkdirp": "^0.5.1",
+    "mocha": "^5.0.5",
+    "npm-run-all": "^1.4.0",
+    "nyc": "^13.3.0",
+    "rimraf": "^2.5.0",
+    "rollup": "^1.2.3",
+    "rollup-plugin-terser": "^4.0.4"
+  },
+  "scripts": {
+    "test": "mocha --bail --require @babel/register --require ./test/setup.js \"source/**/*.test.js\" \"test/**/*.test.js\"",
+    "test-coverage": "cross-env NODE_ENV=test nyc mocha --bail --require ./test/setup.js \"source/**/*.test.js\" \"test/**/*.test.js\"",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "browser-build": "rollup --config rollup.config.js",
+    "clean-for-build": "rimraf ./commonjs/**/* ./modules/**/*",
+    "build-commonjs-modules": "cross-env babel ./source --out-dir ./commonjs --source-maps --ignore *.test.js",
+    "build-es6-modules": "cross-env BABEL_ENV=es6 babel ./source --out-dir ./modules --source-maps --ignore *.test.js",
+    "build": "npm-run-all clean-for-build build-commonjs-modules build-es6-modules browser-build",
+    "prepublish": "npm-run-all build test",
+    "generate": "babel-node bin/generate-plural-functions"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/catamphetamine/intl-plural-rules-polyfill.git"
+  },
+  "keywords": [
+    "intl",
+    "pluralrules",
+    "polyfill",
+    "plural",
+    "rules"
+  ],
+  "author": "catamphetamine <purecatamphetamine@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/catamphetamine/intl-plural-rules-polyfill/issues"
+  },
+  "homepage": "https://github.com/catamphetamine/intl-plural-rules-polyfill#readme"
+}
